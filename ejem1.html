@@ -1,0 +1,131 @@
+<!DOCTYPE html> 
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="shortcut icon" type="image/x-icon" href="file:///C:/Users/IMT/Desktop/css/cast.ico">
+        <title>Facebook</title>
+        <style>
+        *{
+	margin: 0;
+	padding: 0;
+}
+#contenedor{
+	margin: 10px auto;
+	width: 1000px;
+	height: 615px;
+}
+.reloj{
+	float: left;
+	font-size: 150px;
+	font-family: Courier,sans-serif;
+	color: #ffffff;
+}
+.boton{
+	outline: none;
+	border: 1px solid #000000;
+	color:#453645;
+	width: 200px;
+	height: 50px;
+	text-shadow: 10px -1px 1px white;
+	font-size: 20px;
+	border-radius: 50px;
+	font-family: Arial, Helvetica, sans-serif;;
+	cursor: pointer;
+	background-image: linear-gradient(#000000 yellow,#2c6f05);
+}
+.boton:active{
+	background-image: linear-gradient( #453645,#ffffff);
+}
+.boton:hover{
+	box-shadow: 0px 0px 14px #777777;
+}
+    h1 {
+    margin: 200px auto;
+	width: 1000px;
+	height: 10px;
+    font-size: 80px;
+	font-family: helvetica;
+	color: #ffffff;
+}
+        </style>
+    </head>
+    <body background="C:\Users\IMT\Desktop\css\ol.gif">
+        <h1>TIEMPO TRANSCURRIDO</h1>
+            <div id="contenedor">
+                    <div class="reloj" id="Horas">00</div>
+                    <div class="reloj" id="Minutos">:00</div>
+                    <div class="reloj" id="Segundos">:00</div>
+                    <div class="reloj" id="Centesimas">:00</div>
+                    <input type="button" class="boton" id="inicio" value="Start &#9658;" onclick="inicio();">
+                    <input type="button" class="boton" id="parar" value="Stop &#8718;" onclick="parar();" disabled>
+                    <input type="button" class="boton" id="continuar" value="Resume &#8634;" onclick="inicio();" disabled>
+                    <input type="button" class="boton" id="reinicio" value="Reset &#8635;" onclick="reinicio();" disabled>
+                </div>
+         <script>
+             var centesimas = 0;
+var segundos = 0;
+var minutos = 0;
+var horas = 0;
+function inicio () {
+	control = setInterval(cronometro,10);
+	document.getElementById("inicio").disabled = true;
+	document.getElementById("parar").disabled = false;
+	document.getElementById("continuar").disabled = true;
+	document.getElementById("reinicio").disabled = false;
+}
+function parar () {
+	clearInterval(control);
+	document.getElementById("parar").disabled = true;
+	document.getElementById("continuar").disabled = false;
+}
+function reinicio () {
+	clearInterval(control);
+	centesimas = 0;
+	segundos = 0;
+	minutos = 0;
+	horas = 0;
+	Centesimas.innerHTML = ":00";
+	Segundos.innerHTML = ":00";
+	Minutos.innerHTML = ":00";
+	Horas.innerHTML = "00";
+	document.getElementById("inicio").disabled = false;
+	document.getElementById("parar").disabled = true;
+	document.getElementById("continuar").disabled = true;
+	document.getElementById("reinicio").disabled = true;
+}
+function cronometro () {
+	if (centesimas < 99) {
+		centesimas++;
+		if (centesimas < 10) { centesimas = "0"+centesimas }
+		Centesimas.innerHTML = ":"+centesimas;
+	}
+	if (centesimas == 99) {
+		centesimas = -1;
+	}
+	if (centesimas == 0) {
+		segundos ++;
+		if (segundos < 10) { segundos = "0"+segundos }
+		Segundos.innerHTML = ":"+segundos;
+	}
+	if (segundos == 59) {
+		segundos = -1;
+	}
+	if ( (centesimas == 0)&&(segundos == 0) ) {
+		minutos++;
+		if (minutos < 10) { minutos = "0"+minutos }
+		Minutos.innerHTML = ":"+minutos;
+	}
+	if (minutos == 59) {
+		minutos = -1;
+	}
+	if ( (centesimas == 0)&&(segundos == 0)&&(minutos == 0) ) {
+		horas ++;
+		if (horas < 10) { horas = "0"+horas }
+		Horas.innerHTML = horas;
+	}
+}
+         </script>
+    </body>
+    </html>
